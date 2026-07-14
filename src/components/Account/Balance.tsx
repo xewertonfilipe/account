@@ -1,5 +1,4 @@
 import { StyledBalance } from "./styles";
-
 import { IconEye } from "../Icons";
 
 const formatter = new Intl.NumberFormat("pt-BR", {
