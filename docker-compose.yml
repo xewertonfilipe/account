@@ -1,0 +1,7 @@
+services:
+  bytebank-account:
+    build: .
+    ports:
+      - "8083:80"
+    environment:
+      NODE_ENV: production
