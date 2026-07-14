@@ -9,4 +9,20 @@ module.exports = {
     "single-spa-react/parcel": "single-spa-react/lib/cjs/parcel.cjs",
   },
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
+  collectCoverageFrom: [
+    "features/**/*.ts",
+    "http/**/*.ts",
+    "store/**/*.ts",
+    "root.component.tsx",
+    "!**/*.test.ts",
+    "!**/*.test.tsx",
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
 };

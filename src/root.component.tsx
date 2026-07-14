@@ -1,28 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
 
 import { Account } from "./components/Account";
-import http from "./http";
-import type { AccountBalanceResponse } from "./interfaces";
+import { fetchBalance, selectBalance } from "./features/account/account";
+import store from "./store";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 
 const TRANSACTION_CREATED_EVENT = "bank:transaction:created";
 
-export default function Root() {
-  const [balance, setBalance] = useState<number>(0);
+function AccountApp() {
+  const dispatch = useAppDispatch();
+  const balance = useAppSelector(selectBalance);
 
-  const getBalance = (): void => {
-    http
-      .get<AccountBalanceResponse>("/transactions/balance")
-      .then((response) => {
-        setBalance(response.data.balance);
-      })
-      .catch(() => {
-        setBalance(0);
-      });
-  };
+  useEffect(() => {
+    dispatch(fetchBalance());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleTransactionCreated = () => {
-      getBalance();
+      dispatch(fetchBalance());
     };
 
     document.addEventListener(
@@ -36,15 +32,19 @@ export default function Root() {
         handleTransactionCreated
       );
     };
-  }, []);
-
-  useEffect(() => {
-    getBalance();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Account balanceValue={balance} />
     </>
+  );
+}
+
+export default function Root() {
+  return (
+    <Provider store={store}>
+      <AccountApp />
+    </Provider>
   );
 }
