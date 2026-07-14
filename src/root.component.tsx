@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 
 import { Account } from "./components/Account";
 import http from "./http";
+import type { AccountBalanceResponse } from "./interfaces";
 
 const TRANSACTION_CREATED_EVENT = "bank:transaction:created";
 
-export default function Root(props) {
-  const getBalance = () => {
+export default function Root() {
+  const [balance, setBalance] = useState<number>(0);
+
+  const getBalance = (): void => {
     http
-      .get("/transactions/balance")
+      .get<AccountBalanceResponse>("/transactions/balance")
       .then((response) => {
-        setUser(response.data);
+        setBalance(response.data.balance);
       })
       .catch(() => {
-        setUser(0);
+        setBalance(0);
       });
   };
 
@@ -35,15 +38,13 @@ export default function Root(props) {
     };
   }, []);
 
-  const [user, setUser] = useState(0);
-
   useEffect(() => {
     getBalance();
   }, []);
 
   return (
     <>
-      <Account balanceValue={user?.balance ?? 0} />
+      <Account balanceValue={balance} />
     </>
   );
 }

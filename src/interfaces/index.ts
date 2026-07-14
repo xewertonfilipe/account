@@ -2,6 +2,10 @@ export interface IBalance {
   balanceValue: number;
 }
 
+export interface AccountBalanceResponse {
+  balance: number;
+}
+
 export interface Transaction {
   id: string;
   value: number;
