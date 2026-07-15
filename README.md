@@ -51,6 +51,12 @@ docker compose up --build
 
 - Modo local do orchestrator (`isLocal`): consome `http://localhost:9004/bytebank-account.js`
 
+## Responsividade
+
+- Layout do card de conta ajustado para telas pequenas, tablets e desktop.
+- Breakpoints validados: 320px, 768px e 1024px.
+- Ajustes principais: card com espacamento responsivo, bloco de saldo sem rigidez horizontal e tipografia escalavel.
+
 ## Scripts uteis
 
 - `npm start`: sobe webpack dev server na porta 9004
