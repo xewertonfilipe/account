@@ -21,6 +21,14 @@ Microfrontend responsavel por exibir o card de saldo da conta no shell do Byteba
 npm install
 ```
 
+## Deploy no Vercel
+
+- Build Command: `npm run build:webpack`
+- Output Directory: `dist`
+
+Configure `VITE_API_BASE_URL` no projeto da Vercel para Development/Preview/Production.
+Sem essa variavel em producao, o MFE usa URL relativa da mesma origem.
+
 ## Executando em desenvolvimento (npm)
 
 1. Inicie o servidor de desenvolvimento:
