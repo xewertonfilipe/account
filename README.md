@@ -93,3 +93,4 @@ npm run coverage
 1. Se a porta `9004` estiver ocupada, finalize o processo em conflito e rode `npm start` novamente.
 2. Se o shell nao carregar o MFE, confirme se o orchestrator esta no mesmo perfil de portas (900x ou 808x).
 3. Se houver erro de cache no navegador, faca hard refresh (Ctrl+F5).
+4. Se as chamadas de API estiverem indo para URL errada, valide a variavel `VITE_API_BASE_URL` no ambiente local ou nas Environment Variables da Vercel e gere novo deploy.
