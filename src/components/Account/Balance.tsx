@@ -1,5 +1,7 @@
 import { StyledBalance } from "./styles";
 import { IconEye } from "../Icons";
+import type { AccountStatus } from "../../features/account/account";
+import { LoadingBalance } from "./LoadingBalance";
 
 const formatter = new Intl.NumberFormat("pt-BR", {
   style: "currency",
@@ -9,9 +11,10 @@ const formatter = new Intl.NumberFormat("pt-BR", {
 
 interface BalanceProps {
   value: number;
+  status: AccountStatus;
 }
 
-export const Balance = ({ value }: BalanceProps) => {
+export const Balance = ({ value, status }: BalanceProps) => {
   return (
     <StyledBalance>
       <h3>
@@ -19,7 +22,11 @@ export const Balance = ({ value }: BalanceProps) => {
         <IconEye />
       </h3>
       <p>Conta Corrente</p>
-      <strong>{formatter.format(value)}</strong>
+      {status === "loading" ? (
+        <LoadingBalance />
+      ) : (
+        <strong>{formatter.format(value)}</strong>
+      )}
     </StyledBalance>
   );
 };

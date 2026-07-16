@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../http";
 import type { AccountBalanceResponse } from "../../interfaces";
 
-type AccountStatus = "idle" | "loading" | "succeeded" | "failed";
+export type AccountStatus = "idle" | "loading" | "succeeded" | "failed";
 
 interface AccountState {
   balance: number;

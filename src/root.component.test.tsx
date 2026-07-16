@@ -8,17 +8,22 @@ const mockDispatch = jest.fn();
 
 describe("Root component", () => {
   let dispatchSpy: jest.SpyInstance;
+  let selectorSpy: jest.SpyInstance;
 
   beforeEach(() => {
     jest.clearAllMocks();
     dispatchSpy = jest
       .spyOn(hooks, "useAppDispatch")
       .mockReturnValue(mockDispatch);
-    jest.spyOn(hooks, "useAppSelector").mockReturnValue(0);
+    selectorSpy = jest
+      .spyOn(hooks, "useAppSelector")
+      .mockReturnValueOnce(0)
+      .mockReturnValueOnce("succeeded");
   });
 
   afterEach(() => {
     dispatchSpy.mockRestore();
+    selectorSpy.mockRestore();
   });
 
   it("should be in the document", () => {
@@ -75,5 +80,16 @@ describe("Root component", () => {
     fetchSpy.mockRestore();
     addEventListenerSpy.mockRestore();
     removeEventListenerSpy.mockRestore();
+  });
+
+  it("shows loading balance while fetching data", () => {
+    selectorSpy
+      .mockReset()
+      .mockReturnValueOnce(0)
+      .mockReturnValueOnce("loading");
+
+    const { getByText } = render(<Root />);
+
+    expect(getByText(/Carregando saldo/i)).toBeInTheDocument();
   });
 });

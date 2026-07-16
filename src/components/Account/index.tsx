@@ -1,4 +1,5 @@
 import type { IBalance } from "../../interfaces";
+import type { AccountStatus } from "../../features/account/account";
 import { Balance } from "./Balance";
 import { BalanceWrapper, Card, DateWrapper, Heading } from "./styles";
 
@@ -9,7 +10,11 @@ const options: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
-export const Account = ({ balanceValue }: IBalance) => {
+interface AccountProps extends IBalance {
+  status: AccountStatus;
+}
+
+export const Account = ({ balanceValue, status }: AccountProps) => {
   return (
     <Card>
       <div>
@@ -19,7 +24,7 @@ export const Account = ({ balanceValue }: IBalance) => {
         </DateWrapper>
       </div>
       <BalanceWrapper>
-        <Balance value={balanceValue} />
+        <Balance value={balanceValue} status={status} />
       </BalanceWrapper>
     </Card>
   );

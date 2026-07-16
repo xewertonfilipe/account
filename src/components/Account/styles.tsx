@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const shimmer = keyframes`
+  0% {
+    background-position: -320px 0;
+  }
+  100% {
+    background-position: 320px 0;
+  }
+`;
 
 export const Card = styled.section`
   background-color: #004d61;
@@ -64,4 +73,39 @@ export const StyledBalance = styled.div`
     font-size: clamp(24px, 8vw, 31px);
     line-height: 1.2;
   }
+`;
+
+const loadingBase = css`
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.2) 80%
+  );
+  background-size: 320px 100%;
+  animation: ${shimmer} 1.2s ease-in-out infinite;
+`;
+
+export const LoadingBalanceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  span {
+    font-size: clamp(13px, 3vw, 14px);
+    opacity: 0.9;
+  }
+`;
+
+export const LoadingLine = styled.div`
+  ${loadingBase}
+  width: clamp(120px, 30vw, 170px);
+  height: 16px;
+`;
+
+export const LoadingValue = styled.div`
+  ${loadingBase}
+  width: clamp(170px, 45vw, 240px);
+  height: clamp(28px, 8vw, 34px);
 `;
