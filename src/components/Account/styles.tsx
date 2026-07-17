@@ -12,7 +12,7 @@ const shimmer = keyframes`
 export const Card = styled.section`
   background-color: #004d61;
   border-radius: 8px;
-  min-height: clamp(280px, 45vw, 400px);
+  min-height: clamp(280px, 45vw, 360px);
   width: 100%;
   padding: clamp(16px, 4vw, 24px);
   color: #fff;
